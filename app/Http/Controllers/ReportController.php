@@ -1,0 +1,134 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Customer;
+use App\Graph;
+use App\Report;
+use App\Rrd;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class ReportController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        return view('content.report');
+    }
+
+
+    public function create()
+    {
+        $graphs = Graph::all();
+        $customers = Customer::all();
+        return view('content.createReport', compact('graphs', 'customers'));
+    }
+
+
+    public function store(Request $request)
+    {
+        //
+
+        date_default_timezone_set("Asia/Bangkok");
+        $uid = Auth::id();
+
+        $customer_id = '';
+
+        if ($request->filled('new_customer')) {
+            $request->validate([
+                'rrdname.*.rrd_name' => 'required|regex:/(^(.*?[.]+rrd)?$)/',
+                'rrdtitle.*.rrd_title' => 'required',
+                'report_title' => 'required',
+                'report_type' => 'required  ',
+                'new_customer' => 'required|unique:customers,customer_name',
+                'email' => 'required|email|unique:customers,customer_email'
+            ]);
+            $new_customer = Customer::create([
+                'customer_name' => $request->new_customer,
+                'customer_email' => $request->email
+            ]);
+
+            $customer_id = $new_customer->id;
+        } else {
+            $request->validate([
+                'rrdname.*.rrd_name' => 'required|regex:/(^(.*?[.]+rrd)?$)/',
+                'rrdtitle.*.rrd_title' => 'required',
+                'report_title' => 'required',
+                'report_type' => 'required  ',
+                // 'email' => 'required|email|unique:customers,customer_email',
+                'ext_customer' => 'required'
+            ]);
+
+            $customer_id = $request->ext_customer;
+        }
+
+        $report = Report::create([
+            'user_id' => $uid,
+            'report_title' => $request->report_title,
+            'customer_id' => $customer_id,
+            'graph_id' => $request->report_type,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+        $report_id = $report->id;
+
+        foreach ($request->get('rrd') as $value) {
+            $rrd = new Rrd();
+            $rrd->rrd_name = $value['rrd_name'];
+            $rrd->rrd_title = $value['rrd_title'];
+            $rrd->report_id = $report_id;
+            $rrd->save();
+        }
+
+        return redirect('/report');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
