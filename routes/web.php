@@ -18,4 +18,5 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/report/getReport', 'ReportController@getReport')->name('getReport');
 Route::resource('report', 'ReportController');

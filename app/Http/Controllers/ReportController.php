@@ -6,8 +6,11 @@ use App\Customer;
 use App\Graph;
 use App\Report;
 use App\Rrd;
+use App\User;
+use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -40,14 +43,17 @@ class ReportController extends Controller
         $customer_id = '';
 
         if ($request->filled('new_customer')) {
-            $request->validate([
-                'rrdname.*.rrd_name' => 'required|regex:/(^(.*?[.]+rrd)?$)/',
-                'rrdtitle.*.rrd_title' => 'required',
+
+            $this->validate($request, [
+                'rrd.*.rrd_name' => 'required|regex:/(^(.*?[.]+rrd)?$)/',
+                // 'rrd.*.rrd_name' => 'required',
+                'rrd.*.rrd_title' => 'required',
                 'report_title' => 'required',
                 'report_type' => 'required  ',
                 'new_customer' => 'required|unique:customers,customer_name',
                 'email' => 'required|email|unique:customers,customer_email'
             ]);
+
             $new_customer = Customer::create([
                 'customer_name' => $request->new_customer,
                 'customer_email' => $request->email
@@ -56,11 +62,10 @@ class ReportController extends Controller
             $customer_id = $new_customer->id;
         } else {
             $request->validate([
-                'rrdname.*.rrd_name' => 'required|regex:/(^(.*?[.]+rrd)?$)/',
-                'rrdtitle.*.rrd_title' => 'required',
+                'rrd.*.rrd_name' => 'required',
+                'rrd.*.rrd_title' => 'required',
                 'report_title' => 'required',
                 'report_type' => 'required  ',
-                // 'email' => 'required|email|unique:customers,customer_email',
                 'ext_customer' => 'required'
             ]);
 
@@ -84,7 +89,7 @@ class ReportController extends Controller
             $rrd->save();
         }
 
-        return redirect('/report');
+        return redirect('/report')->with('status', 'Data Already Added');
     }
 
     /**
@@ -129,6 +134,21 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 
+    }
+
+    public function getReport()
+    {
+        $data =
+            DB::table('reports')
+            ->join('graphs', 'graphs.id', '=', 'reports.graph_id')
+            ->join('users', 'users.id', '=', 'reports.user_id')
+            ->join('customers', 'customers.id', '=', 'reports.customer_id')
+            ->select('customers.customer_name', 'customers.customer_email', 'reports.report_title', 'graphs.graph_type')
+            ->orderBy('reports.created_at', 'DESC')
+            ->get();
+        return Datatables::of($data)
+            ->addIndexColumn() //untuk add index pada column
+            ->make(true);
     }
 }

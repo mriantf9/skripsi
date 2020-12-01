@@ -11,4 +11,9 @@ class Customer extends Model
         'customer_name',
         'customer_email'
     ];
+
+    public function report()
+    {
+        return $this->belongsTo('App\Report');
+    }
 }

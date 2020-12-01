@@ -25,12 +25,17 @@
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="customer_name">Customer Name</label>
-                            <select name="ext_customer" id="ext_cust" class="form-control">
+                            <select name="ext_customer" id="ext_cust" class="form-control @error ('ext_customer') is-invalid @enderror">
                                 <option value="">Select Customer</option>
                                 @foreach ($customers as $customer)
                                 <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
                                 @endforeach
                             </select>
+                            @error('ext_customer')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div> 
+                            @enderror
                         </div>
                         <div class="form-group col-md-3">
                             <label for="customer_name">New Customer Name</label>
@@ -90,14 +95,20 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <table class="table table-borderless" id="dynamicTable">  
-                                <tr>
-                                    <th>.RRD Name</th>
-                                </tr>
-                                <tr>  
-                                    <td><input type="text" name="rrd[0][rrd_name]" placeholder="Enter RRD name" class="form-control"/></td> 
-                                    <td><input type="text" name="rrd[0][rrd_title]" placeholder="Enter RRD Title" class="form-control"/></td> 
-                                    <td><button type="button" name="add" id="add" class="btn btn-sm btn-primary">Add More</button></td>  
-                                </tr>  
+                                <thead>
+                                    <tr>
+                                    <th><strong>Input .rrd and RRD Title</strong></th>
+                                    </tr> 
+                                </thead> 
+                                <tbody id="rrd">
+                                    <tr>
+                                        <td><input type="text" name="rrd[0][rrd_name]" placeholder="Enter RRD name" class="form-control @error ('email') is-invalid @enderror"/>
+                                        </td> 
+                                        <td><input type="text" name="rrd[0][rrd_title]" placeholder="Enter RRD Title" class="form-control @error ('rrd[0][rrd_title]') is-invalid @enderror"/>
+                                        </td> 
+                                        <td><button type="button" name="add" id="add" class="btn btn-sm btn-primary">Add More</button></td>  
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -132,15 +143,23 @@
     var email_fields = document.getElementById('email_cust');
     var new_cust = document.getElementById('new_cust');
     var ext_cust = document.getElementById('ext_cust');
+    var cb_add = document.getElementById('cb_add');
 
     new_cust.disabled = true;
     email_fields.disabled = true;
+    
+    if (cb_add.checked) {
+        
+        new_cust.disabled = true;
+        email_fields.disabled = true;
+        
+    }
 
-    document.getElementById('cb_add').onchange = function() {
+    cb_add.onchange = function() {
 
-    new_cust.disabled = !this.checked;
-    ext_cust.disabled = this.checked;
-    email_fields.disabled = !this.checked;
+        new_cust.disabled = !this.checked;
+        ext_cust.disabled = this.checked;
+        email_fields.disabled = !this.checked;
 
     };
 </script>
@@ -148,14 +167,7 @@
 <script type="text/javascript">
 // 2.1 "Store" all books in some place on the page, for example, you can pass PHP variable into JS variable like this
 var cust = <?= json_encode($customers); ?>;
-console.log(cust);
 
-/*
- * 2.2 Create function for search book by its name 
- * (if each value of the field "name" in the $books is unique) or by some unique field, for example, "id"
- */
-
-// get book by name
 var getEmailByCustomer = function (custName) {
     if (typeof cust === 'object') {
         for (var key in cust) {
@@ -179,11 +191,21 @@ $(document).ready(function () {
         }
         // we can't find email by it's name
         else {
-            alert("Sorry, we can find description for this book");
+            alert("Customer not Found");
         }
 
     });
 });
+</script>
+
+<script>
+    $(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 4000);
+    });    
 </script>
 
 @endsection
