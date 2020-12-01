@@ -47,8 +47,8 @@
 
 @section('javascripts')
 
-<script src="{{url ('Admin/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{url ('Admin/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset ('Admin/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset ('Admin/js/dataTables.bootstrap4.min.js')}}"></script>
 
 <script type="text/javascript">
 
