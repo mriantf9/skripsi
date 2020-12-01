@@ -3,7 +3,7 @@
 @section('title', 'Schedule Report')
 
 @section('stylesheet')
-    <link rel="stylesheet" href="{{url('Admin/css/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" href="{{asset('Admin/css/dataTables.bootstrap4.css')}}">
 @endsection
 
 @section('content')

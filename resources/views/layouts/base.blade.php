@@ -11,16 +11,16 @@
     <link rel="icon" href="favicon.ico">
     <title>@yield('title')</title>
     <!-- Simple bar CSS -->
-    <link rel="stylesheet" href="{{url ('Admin/css/simplebar.css')}}">
+    <link rel="stylesheet" href="{{asset('Admin/css/simplebar.css')}}">
     <!-- Fonts CSS -->
-    <link href="{{url ('Admin/css/font.css')}}" rel="stylesheet">
+    <link href="{{asset ('Admin/css/font.css')}}" rel="stylesheet">
     <!-- Icons CSS -->
-    <link rel="stylesheet" href="{{url ('Admin/css/feather.css')}}">
+    <link rel="stylesheet" href="{{asset ('Admin/css/feather.css')}}">
     <!-- Date Range Picker CSS -->
-    <link rel="stylesheet" href="{{url ('Admin/css/daterangepicker.css')}}">
+    <link rel="stylesheet" href="{{asset ('Admin/css/daterangepicker.css')}}">
     <!-- App CSS -->
-    <link rel="stylesheet" href="{{url ('Admin/css/app-light.css')}}" id="lightTheme">
-    <link rel="stylesheet" href="{{url ('Admin/css/app-dark.css')}}" id="darkTheme" disabled>
+    <link rel="stylesheet" href="{{asset ('Admin/css/app-light.css')}}" id="lightTheme">
+    <link rel="stylesheet" href="{{asset ('Admin/css/app-dark.css')}}" id="darkTheme" disabled>
     @yield('stylesheet')
 </head>
 
@@ -34,16 +34,16 @@
 
 
     
-    <script src="{{url ('Admin/js/jquery.min.js')}}"></script>
-    <script src="{{url ('Admin/js/popper.min.js')}}"></script>
-    <script src="{{url ('Admin/js/moment.min.js')}}"></script>
-    <script src="{{url ('Admin/js/bootstrap.min.js')}}"></script>
-    <script src="{{url ('Admin/js/simplebar.min.js')}}"></script>
-    <script src='{{url ('Admin/js/daterangepicker.js')}}'></script>
-    <script src='{{url ('Admin/js/jquery.stickOnScroll.js')}}'></script>
-    <script src="{{url ('Admin/js/tinycolor-min.js')}}"></script>
-    <script src="{{url ('Admin/js/config.js')}}"></script>
-    <script src="{{url ('Admin/js/apps.js')}}"></script>
+    <script src="{{asset ('Admin/js/jquery.min.js')}}"></script>
+    <script src="{{asset ('Admin/js/popper.min.js')}}"></script>
+    <script src="{{asset ('Admin/js/moment.min.js')}}"></script>
+    <script src="{{asset ('Admin/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset ('Admin/js/simplebar.min.js')}}"></script>
+    <script src='{{asset ('Admin/js/daterangepicker.js')}}'></script>
+    <script src='{{asset ('Admin/js/jquery.stickOnScroll.js')}}'></script>
+    <script src="{{asset ('Admin/js/tinycolor-min.js')}}"></script>
+    <script src="{{asset ('Admin/js/config.js')}}"></script>
+    <script src="{{asset ('Admin/js/apps.js')}}"></script>
     @yield('javascripts')
 </body>
 
