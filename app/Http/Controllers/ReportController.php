@@ -62,7 +62,7 @@ class ReportController extends Controller
             $customer_id = $new_customer->id;
         } else {
             $request->validate([
-                'rrd.*.rrd_name' => 'required',
+                'rrd.*.rrd_name' => 'required|regex:/(^(.*?[.]+rrd)?$)/',
                 'rrd.*.rrd_title' => 'required',
                 'report_title' => 'required',
                 'report_type' => 'required  ',
@@ -139,12 +139,14 @@ class ReportController extends Controller
 
     public function getReport()
     {
+        $users = Auth::id();
         $data =
             DB::table('reports')
             ->join('graphs', 'graphs.id', '=', 'reports.graph_id')
             ->join('users', 'users.id', '=', 'reports.user_id')
             ->join('customers', 'customers.id', '=', 'reports.customer_id')
-            ->select('customers.customer_name', 'customers.customer_email', 'reports.report_title', 'graphs.graph_type')
+            ->select('customers.customer_name', 'customers.customer_email', 'reports.report_title', 'graphs.graph_type', 'users.name')
+            ->where('users.id', $users)
             ->orderBy('reports.created_at', 'DESC')
             ->get();
         return Datatables::of($data)

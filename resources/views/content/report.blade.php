@@ -4,6 +4,8 @@
 
 @section('stylesheet')
     <link rel="stylesheet" href="{{asset('Admin/css/dataTables.bootstrap4.css')}}">
+    <link rel="stylesheet" href="{{asset('Admin/css/bootstrap-select.css')}}">
+
 @endsection
 
 @section('content')
@@ -29,6 +31,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>#</th>
+                                        <th>Report Created By</th>
                                         <th>Customer Name</th>
                                         <th>Customer Email</th>
                                         <th>Report Title</th>
@@ -61,6 +64,10 @@
                 {
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
                 },
                 {
                     data: 'customer_name',

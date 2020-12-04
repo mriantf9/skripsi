@@ -2,6 +2,11 @@
 
 @section('title', 'Create Report')
 
+@section('stylesheet')
+    <link rel="stylesheet" href="{{asset('Admin/css/bootstrap-select.css')}}">
+
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -97,7 +102,8 @@
                             <table class="table table-borderless" id="dynamicTable">  
                                 <thead>
                                     <tr>
-                                    <th><strong>Input .rrd and RRD Title</strong></th>
+                                    <th><strong>Input  <i>Filename.rrd</i></strong></th>
+                                    <th><strong>Input <i>Title Interface</i></strong></th>
                                     </tr> 
                                 </thead> 
                                 <tbody id="rrd">
@@ -125,6 +131,7 @@
 
 @section('javascripts')
 
+<script src="{{asset ('Admin/js/bootstrap-select.js')}}"></script>
 <script type="text/javascript">
    
     var i = 0;
@@ -152,6 +159,7 @@
         
         new_cust.disabled = true;
         email_fields.disabled = true;
+
         
     }
 
@@ -160,6 +168,7 @@
         new_cust.disabled = !this.checked;
         ext_cust.disabled = this.checked;
         email_fields.disabled = !this.checked;
+
 
     };
 </script>
