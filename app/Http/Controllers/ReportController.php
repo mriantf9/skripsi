@@ -7,10 +7,10 @@ use App\Graph;
 use App\Report;
 use App\Rrd;
 use App\User;
-use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\Datatables\Datatables;
 
 class ReportController extends Controller
 {
@@ -135,6 +135,11 @@ class ReportController extends Controller
     public function destroy($id)
     {
         // 
+        $query = 'DELETE reports, rrds
+                    FROM reports
+                    JOIN rrds ON rrds.report_id = reports.id
+                    WHERE report_id = ?';
+        DB::delete($query, array($id));
     }
 
     public function getReport()
@@ -145,12 +150,21 @@ class ReportController extends Controller
             ->join('graphs', 'graphs.id', '=', 'reports.graph_id')
             ->join('users', 'users.id', '=', 'reports.user_id')
             ->join('customers', 'customers.id', '=', 'reports.customer_id')
-            ->select('customers.customer_name', 'customers.customer_email', 'reports.report_title', 'graphs.graph_type', 'users.name')
+            ->select('customers.customer_name', 'customers.customer_email', 'reports.report_title', 'graphs.graph_type', 'users.name', 'reports.id')
             ->where('users.id', $users)
             ->orderBy('reports.created_at', 'DESC')
             ->get();
         return Datatables::of($data)
             ->addIndexColumn() //untuk add index pada column
+            ->addColumn('action', function ($report) {
+                // var_dump($report);
+                // die;
+                return '<a href="/report/' . $report->id . '/edit" class="btn btn-sm btn-outline-primary"><i class="fe fe-edit"></i></a>'
+                    . " " .
+                    '<button class="btn btn-sm btn-outline-danger btn-delete" data-remote="/report/' . $report->id . '"><i class="fe fe-trash-2"></i></button>';
+                // '<a href="/report/' . $report->id . '" class="btn btn-sm btn-outline-danger"><i class="fe fe-trash-2"></i></a>';
+            })
+            ->editColumn('id', '{{$id}}')
             ->make(true);
     }
 }

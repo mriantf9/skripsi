@@ -13,13 +13,13 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
-                <h1 class="page-title">Scheduling Report</h1>
+                <h1 class="page-title">Customers List</h1>
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{session('status')}}
                     </div>
                 @endif
-                <a href="{{url ('report/create')}}"><button class="btn btn-sm btn-primary"><span class="fe fe-plus mr-1"></span>Add Report</button></a><br>
+                {{-- <a href="{{url ('report/create')}}"><button class="btn btn-sm btn-primary">Add Report</button></a><br> --}}
                 <br>
                 <div class="card shadow">
                     <div class="card-header">
@@ -31,13 +31,9 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>#</th>
-                                        <th>Report Created By</th>
                                         <th>Customer Name</th>
                                         <th>Customer Email</th>
-                                        <th>Report Title</th>
-                                        <th>Report Type</th>
                                         <th>Action</th>
-                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                             </table>
@@ -61,15 +57,11 @@
         processing: true,
         serverSide: true,
         responsive: true,
-        ajax: '{{ url("report/getReport") }}',
+        ajax: '{{ url("customer/getCustomer") }}',
         columns: [
                 {
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
                 },
                 {
                     data: 'customer_name',
@@ -78,14 +70,6 @@
                 {
                     data: 'customer_email',
                     name: 'customer_email'
-                },
-                {
-                    data: 'report_title', 
-                    name: 'report_title'
-                },
-                {
-                    data: 'graph_type', 
-                    name: 'graph_type'
                 },
                 {
                     data: 'action', 

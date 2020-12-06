@@ -71,9 +71,9 @@
                 </ul>
             </li>
             <li class="nav-item w-100">
-                <a class="nav-link" href="widgets.html">
-                    <i class="fe fe-server fe-16"></i>
-                    <span class="ml-3 item-text">Device</span>
+                <a class="nav-link" href="{{url ('/customer')}}">
+                    <i class="fe fe-users fe-16"></i>
+                    <span class="ml-3 item-text">Customers</span>
                     <!-- <span class="badge badge-pill badge-primary">New</span> -->
                 </a>
             </li>
