@@ -1,5 +1,6 @@
 <?php
 
+use App\Customer;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,5 @@ Route::get('/report/getReport', 'ReportController@getReport')->name('getReport')
 Route::resource('report', 'ReportController');
 
 Route::get('/customer/getCustomer', 'CustomerController@getCustomer')->name('getRCustomer');
+Route::delete('/customer/{$id}', 'CustomerController@destroy');
 Route::resource('customer', 'CustomerController');
