@@ -140,6 +140,7 @@ class ReportController extends Controller
                     JOIN rrds ON rrds.report_id = reports.id
                     WHERE report_id = ?';
         DB::delete($query, array($id));
+        return redirect('/report');
     }
 
     public function getReport()

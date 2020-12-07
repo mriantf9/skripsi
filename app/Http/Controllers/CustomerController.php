@@ -86,6 +86,7 @@ class CustomerController extends Controller
         //
         $customers = Customer::find($id);
         $customers->delete();
+        return redirect('/customer');
     }
 
     public function getCustomer()
