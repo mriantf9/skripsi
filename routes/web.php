@@ -22,6 +22,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/report/getReport', 'ReportController@getReport')->name('getReport');
 Route::resource('report', 'ReportController');
+Route::delete('report/{$report}', 'ReportController@destroy')->name('report.destroy');
 
 Route::get('/customer/getCustomer', 'CustomerController@getCustomer')->name('getRCustomer');
 Route::resource('customer', 'CustomerController');
+Route::delete('customer/{$customer}', 'CustomerController@destroy')->name('customer.destroy');

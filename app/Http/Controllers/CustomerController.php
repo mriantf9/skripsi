@@ -86,7 +86,6 @@ class CustomerController extends Controller
         //
         $customers = Customer::find($id);
         $customers->delete();
-        return response()->json($customers);
     }
 
     public function getCustomer()
