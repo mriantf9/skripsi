@@ -51,7 +51,8 @@ class ReportController extends Controller
                 'report_title' => 'required',
                 'report_type' => 'required  ',
                 'new_customer' => 'required|unique:customers,customer_name',
-                'email' => 'required|email|unique:customers,customer_email'
+                'email' => 'required|email|unique:customers,customer_email',
+                'periodic_graph' => 'required'
             ]);
 
             $new_customer = Customer::create([
@@ -66,17 +67,22 @@ class ReportController extends Controller
                 'rrd.*.rrd_title' => 'required',
                 'report_title' => 'required',
                 'report_type' => 'required  ',
-                'ext_customer' => 'required'
+                'ext_customer' => 'required',
+                'periodic_graph' => 'required'
             ]);
 
             $customer_id = $request->ext_customer;
         }
 
+        // var_dump($request->periodic_graph);
+        // die;
         $report = Report::create([
+
             'user_id' => $uid,
             'report_title' => $request->report_title,
             'customer_id' => $customer_id,
             'graph_id' => $request->report_type,
+            'periodic_graph' => $request->periodic_graph,
             'created_at' => date('Y-m-d H:i:s')
         ]);
         $report_id = $report->id;

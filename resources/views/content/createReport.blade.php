@@ -80,12 +80,17 @@
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="report_type">Periodic Graphic Capture</label>
-                            <select class="form-control" name="report_type">
-                                {{-- <option value="">select per graphs</option>
-                                @foreach ($graphs as $graph)
-                                <option value="{{$graph->id}}">{{$graph->graph_type}}</option>
-                                @endforeach --}}
+                            <select class="form-control @error ('periodic_graph') is-invalid @enderror" name="periodic_graph">
+                                <option value="">Select Periodic Capture</option>
+                                <option value="Days">per Days</option>
+                                <option value="Weeks">per Weeks</option>
+                                <option value="Months">per Months</option>
                             </select>
+                            @error('periodic_graph')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div> 
+                            @enderror
                         </div>
                         <div class="form-group col-md-3">
                             <label for="rrd">Customer Email</label>

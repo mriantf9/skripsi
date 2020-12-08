@@ -13,6 +13,7 @@ class Report extends Model
         'report_title',
         'customer_id',
         'graph_id',
+        'periodic_graph',
         'created_at'
     ];
 

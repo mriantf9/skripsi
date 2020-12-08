@@ -99,7 +99,7 @@ class CustomerController extends Controller
                 // die;
                 return '<a href="/customer/' . $customers->id . '/edit" class="btn btn-sm btn-outline-primary"><i class="fe fe-edit"></i></a>'
                     . " " .
-                    '<button class="btn btn-sm btn-outline-danger btn-delete" data-remote="/public/customer/' . $customers->id . '"><i class="fe fe-trash-2"></i></button>';
+                    '<button class="btn btn-sm btn-outline-danger btn-delete" data-remote="/customer/' . $customers->id . '"><i class="fe fe-trash-2"></i></button>';
                 // '<a href="/report/' . $report->id . '" class="btn btn-sm btn-outline-danger"><i class="fe fe-trash-2"></i></a>';
             })
             ->editColumn('id', '{{$id}}')
