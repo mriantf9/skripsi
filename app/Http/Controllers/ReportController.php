@@ -146,6 +146,7 @@ class ReportController extends Controller
                     JOIN rrds ON rrds.report_id = reports.id
                     WHERE report_id = ?';
         DB::delete($query, array($id));
+        return redirect('/report')->with('danger', 'Data Is Deleted');
     }
 
     public function getReport()
@@ -160,14 +161,29 @@ class ReportController extends Controller
             ->where('users.id', $users)
             ->orderBy('reports.created_at', 'DESC')
             ->get();
+
         return Datatables::of($data)
             ->addIndexColumn() //untuk add index pada column
             ->addColumn('action', function ($report) {
                 // var_dump($report);
                 // die;
-                return '<a href="/report/' . $report->id . '/edit" class="btn btn-sm btn-outline-primary"><i class="fe fe-edit"></i></a>'
-                    . " " .
-                    '<button class="btn btn-sm btn-outline-danger btn-delete" data-remote="/report/' . $report->id . '"><i class="fe fe-trash-2"></i></button>';
+                $c = csrf_field();
+                $m = method_field('DELETE');
+                return "<form action='/report/$report->id' method='POST'>
+                      $c
+                    $m
+
+                    <button  type='submit'
+                            class='btn btn-sm btn-outline-danger btn-delete'>
+                        <i class='fe fe-trash-2'></i>
+                    </button>
+                </form>";
+
+                // return '<a href="/report/' . $report->id . '/edit" class="btn btn-sm btn-outline-primary"><i class="fe fe-edit"></i></a>'
+                //     . " " .
+                //     '<button class="btn btn-sm btn-outline-danger btn-delete" data-remote="/report/' . $report->id . '"><i class="fe fe-trash-2"></i></button>';
+
+
                 // '<a href="/report/' . $report->id . '" class="btn btn-sm btn-outline-danger"><i class="fe fe-trash-2"></i></a>';
             })
             ->editColumn('id', '{{$id}}')

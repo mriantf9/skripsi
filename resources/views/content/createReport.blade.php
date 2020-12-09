@@ -92,7 +92,7 @@
                                 </div> 
                             @enderror
                         </div>
-                        <div class="form-group col-md-3">
+                         <div class="form-group col-md-3">
                             <label for="rrd">Customer Email</label>
                             <input type="text" class="form-control @error ('email') is-invalid @enderror" name="email" id="email_cust" value="{{old('email')}}" />
                             @error('email')
