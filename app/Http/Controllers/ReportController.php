@@ -169,7 +169,7 @@ class ReportController extends Controller
                 // die;
                 $c = csrf_field();
                 $m = method_field('DELETE');
-                return "<form action='{{url ('report/$report->id') }}' method='POST'>
+                return "<form action='{{url(report/" . $report->id . ")}}' method='POST'>
                       $c
                     $m
 
