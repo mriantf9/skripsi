@@ -19,6 +19,12 @@
                         {{session('status')}}
                     </div>
                 @endif
+
+                @if (session('danger'))
+                    <div class="alert alert-danger">
+                        {{session('danger')}}
+                    </div>
+                @endif
                 {{-- <a href="{{url ('report/create')}}"><button class="btn btn-sm btn-primary">Add Report</button></a><br> --}}
                 <br>
                 <div class="card shadow">
@@ -82,7 +88,7 @@
     });
  });
 </script>
-<script>
+{{-- <script>
     $('#mytable').on('click', '.btn-delete[data-remote]', function (e) { 
     e.preventDefault();
      $.ajaxSetup({
@@ -104,7 +110,7 @@
     }else
         alert("You have cancelled!");
 });
-</script>
+</script> --}}
 <script>
     $(document).ready(function() {
         window.setTimeout(function() {

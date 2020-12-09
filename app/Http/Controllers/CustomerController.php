@@ -84,8 +84,16 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
-        $customers = Customer::find($id);
-        $customers->delete();
+        // $customers = Customer::find($id);
+        // $customers->delete();
+
+        $query = 'DELETE reports, rrds, customers
+                    FROM reports
+                    JOIN rrds ON rrds.report_id = reports.id
+                    JOIN customers ON customers.id = reports.customer_id
+                    WHERE customer_id = ?';
+        DB::delete($query, array($id));
+        return redirect('/customer')->with('danger', 'Data Is Deleted');
     }
 
     public function getCustomer()
@@ -97,9 +105,24 @@ class CustomerController extends Controller
             ->addColumn('action', function ($customers) {
                 // var_dump($report);
                 // die;
-                return '<a href="/customer/' . $customers->id . '/edit" class="btn btn-sm btn-outline-primary"><i class="fe fe-edit"></i></a>'
-                    . " " .
-                    '<button class="btn btn-sm btn-outline-danger btn-delete" data-remote="/customer/' . $customers->id . '"><i class="fe fe-trash-2"></i></button>';
+
+                $c = csrf_field();
+                $m = method_field('DELETE');
+                return "<form action='customer/$customers->id' method='POST'>
+                      $c
+                    $m
+
+                    <button  type='submit'
+                            class='btn btn-sm btn-outline-danger btn-delete'>
+                        <i class='fe fe-trash-2'></i>
+                    </button>
+                </form>";
+
+                // return '<a href="/customer/' . $customers->id . '/edit" class="btn btn-sm btn-outline-primary"><i class="fe fe-edit"></i></a>'
+                //     . " " .
+                //     '<button class="btn btn-sm btn-outline-danger btn-delete" data-remote="/customer/' . $customers->id . '"><i class="fe fe-trash-2"></i></button>';
+
+
                 // '<a href="/report/' . $report->id . '" class="btn btn-sm btn-outline-danger"><i class="fe fe-trash-2"></i></a>';
             })
             ->editColumn('id', '{{$id}}')
