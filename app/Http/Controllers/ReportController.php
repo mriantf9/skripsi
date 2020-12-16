@@ -170,7 +170,7 @@ class ReportController extends Controller
                 $c = csrf_field();
                 $m = method_field('DELETE');
                 return "<form action='report/$report->id' method='POST'>
-                      $c
+                    $c
                     $m
 
                     <button  type='submit'

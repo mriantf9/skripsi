@@ -109,7 +109,7 @@ class CustomerController extends Controller
                 $c = csrf_field();
                 $m = method_field('DELETE');
                 return "<form action='customer/$customers->id' method='POST'>
-                      $c
+                    $c
                     $m
 
                     <button  type='submit'
