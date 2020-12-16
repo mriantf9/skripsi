@@ -23,5 +23,5 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/report/getReport', 'ReportController@getReport')->name('getReport');
 Route::resource('report', 'ReportController');
 
-Route::get('/customer/getCustomer', 'CustomerController@getCustomer')->name('getRCustomer');
+Route::get('/customer/getCustomer', 'CustomerController@getCustomer')->name('getCustomer');
 Route::resource('customer', 'CustomerController');
