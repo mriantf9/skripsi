@@ -83,14 +83,13 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
         // $customers = Customer::find($id);
         // $customers->delete();
 
         $query = 'DELETE customers, reports, rrds
                     FROM customers
-                    JOIN rrds ON rrds.report_id = reports.id
-                    JOIN reports ON reports.customer_id = customers.id
+                    LEFT JOIN reports ON reports.customer_id = customers.id
+                    LEFT JOIN rrds ON rrds.report_id = reports.id
                     WHERE customers.id = ?';
         DB::delete($query, array($id));
         return redirect('/customer')->with('danger', 'Data Is Deleted');
