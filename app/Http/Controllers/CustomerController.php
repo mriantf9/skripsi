@@ -87,11 +87,11 @@ class CustomerController extends Controller
         // $customers = Customer::find($id);
         // $customers->delete();
 
-        $query = 'DELETE reports, rrds, customers
-                    FROM reports
+        $query = 'DELETE customers, reports, rrds
+                    FROM customers
                     JOIN rrds ON rrds.report_id = reports.id
-                    JOIN customers ON customers.id = reports.customer_id
-                    WHERE customer_id = ?';
+                    JOIN reports ON reports.customer_id = customers.id
+                    WHERE customers.id = ?';
         DB::delete($query, array($id));
         return redirect('/customer')->with('danger', 'Data Is Deleted');
     }
