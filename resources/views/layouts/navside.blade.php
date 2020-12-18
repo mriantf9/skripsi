@@ -77,24 +77,24 @@
                     <!-- <span class="badge badge-pill badge-primary">New</span> -->
                 </a>
             </li>
-            <li class="nav-item w-100">
+            {{-- <li class="nav-item w-100">
                 <a class="nav-link" href="{{url ('counter')}}">
                     <i class="fe fe-clock fe-16"></i>
                     <span class="ml-3 item-text">Counter</span>
                     <!-- <span class="badge badge-pill badge-primary">New</span> -->
                 </a>
-            </li>
+            </li> --}}
             <p class="text-muted nav-heading mt-4 mb-1">
                 <span>Apps</span>
             </p>
             <ul class="navbar-nav flex-fill w-100 mb-2">
                 <li class="nav-item w-100">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('register') }}">
                         <i class="fe fe-user-plus fe-16"></i>
                         <span class="ml-3 item-text">Register Account</span>
                     </a>
                 </li>
-                <p class="text-muted nav-heading mt-4 mb-1">
+                {{-- <p class="text-muted nav-heading mt-4 mb-1">
                     <span>Documentation</span>
                 </p>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
@@ -104,7 +104,7 @@
                             <span class="ml-3 item-text">Getting Start</span>
                         </a>
                     </li>
-                </ul>
+                </ul> --}}
             </ul>
             <!-- <div class="btn-box w-100 mt-4 mb-1">
                     <button type="button" class="btn mb-2 btn-primary btn-lg btn-block">
