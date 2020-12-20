@@ -56,7 +56,7 @@ class RealtimeController extends Controller
             'email' => 'required|email',
             'periodic_graph' => 'required'
         ]);
-        $filename = "realtime_task_" . $uniqid . ".csv";
+        $filename = $uniqid . "_realtime_task.csv";
         $myfile = storage_path('realtime_task/' . $filename);
         foreach ($request->get('rrd') as $value) {
             $data = array(
