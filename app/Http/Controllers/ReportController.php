@@ -178,13 +178,6 @@ class ReportController extends Controller
                         <i class='fe fe-trash-2'></i>
                     </button>
                 </form>";
-
-                // return '<a href="/report/' . $report->id . '/edit" class="btn btn-sm btn-outline-primary"><i class="fe fe-edit"></i></a>'
-                //     . " " .
-                //     '<button class="btn btn-sm btn-outline-danger btn-delete" data-remote="/report/' . $report->id . '"><i class="fe fe-trash-2"></i></button>';
-
-
-                // '<a href="/report/' . $report->id . '" class="btn btn-sm btn-outline-danger"><i class="fe fe-trash-2"></i></a>';
             })
             ->editColumn('id', '{{$id}}')
             ->make(true);

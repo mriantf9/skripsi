@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-typograpy.html"><span class="ml-1 item-text">Realtime Report</span></a>
+                        <a class="nav-link pl-3" href="{{url('realtime')}}"><span class="ml-1 item-text">Realtime Report</span></a>
                     </li>
                 </ul>
             </li>

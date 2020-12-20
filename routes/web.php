@@ -27,3 +27,5 @@ Route::resource('report', 'ReportController');
 
 Route::get('/customer/getCustomer', 'CustomerController@getCustomer')->name('getCustomer');
 Route::resource('customer', 'CustomerController');
+
+Route::resource('realtime', 'RealtimeController');
