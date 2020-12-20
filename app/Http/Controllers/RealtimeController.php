@@ -68,7 +68,7 @@ class RealtimeController extends Controller
                     $request->email,
                     $request->periodic_graph,
                     $value['rrd_name'],
-                    $value['rrd_title'] . "\n"
+                    $value['rrd_title']
                 )
             );
 
