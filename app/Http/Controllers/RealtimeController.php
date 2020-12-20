@@ -84,6 +84,7 @@ class RealtimeController extends Controller
             }
         }
         return redirect('/realtime')->with('status', 'Data Already Added with uniq code "' . $uniqid . '"');
+        shell_exec('/usr/bin/bash /home/mriantf/script_skripsi/script/realtime_script/rsyncRealtime.sh ' . $uniqid . " " . $filename);
     }
 
     /**
