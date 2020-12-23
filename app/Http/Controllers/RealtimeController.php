@@ -77,10 +77,16 @@ class RealtimeController extends Controller
                 $second_var = implode(";", $key);
                 if (!is_file($myfile)) {
                     $second_var = implode(";", $key);
-                    Storage::append("realtime_task/" . $filename, $second_var);
+                    Storage::prepend("realtime_task/" . $filename, $second_var);
                 } else {
                     Storage::put("realtime_task/" . $filename, $second_var);
                 }
+                // if (!is_file($myfile)) {
+                //     $second_var = implode(";", $key);
+                //     Storage::append("realtime_task/" . $filename, $second_var);
+                // } else {
+                //     Storage::put("realtime_task/" . $filename, $second_var);
+                // }
             }
         }
         return redirect('/realtime')->with('status', 'Data Already Added with uniq code "' . $uniqid . '"');

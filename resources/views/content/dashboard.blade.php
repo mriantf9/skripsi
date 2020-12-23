@@ -33,7 +33,7 @@
                             <div class="card shadow mb-4">
                                 <div class="card-body">
                                     <i class="fe fe-edit fe-32 text-success"></i>
-                                    <h3 class="h5 mt-4 mb-1">Total Report</h3>
+                                    <h3 class="h5 mt-4 mb-1">Total Report Schedule</h3>
                                     <h3 class="card-title mb-0">{{$countreports}}</h3>
                                     <a href="{{url('report')}}">
                                         <p class="text-muted">Create Reports</p>
