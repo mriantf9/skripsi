@@ -22,7 +22,7 @@
                     </div>
                 @endif
                 <h1 class="page-title">Create Realtime Report</h1>
-                <p class="text-muted font-italic">*Note: Realtime report need a time arround 10 minutes to collect the data</p>
+                <p class="text-muted font-italic">*Note: Realtime report need time arround 5 minutes to collect the data</p>
                 <form action="{{url ('realtime')}}" method="POST">
                     @csrf
                     @if ($errors->any())
