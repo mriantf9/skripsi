@@ -49,20 +49,30 @@
                         <div class="form-group col-md-3">
                           <label for="date-input1">Start Date From</label>
                           <div class="input-group">
-                            <input type="text" class="form-control drgpicker" name="startdate" value="" aria-describedby="button-addon2">
+                            <input type="text" class="form-control drgpicker @error ('startdate') is-invalid @enderror" name="startdate" id="StartDate" value="" aria-describedby="button-addon2">
                             <div class="input-group-append">
                               <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
                             </div>
                           </div>
+                             @error('startdate')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div> 
+                            @enderror
                         </div>
                         <div class="form-group col-md-3">
                           <label for="date-input1">End Date</label>
                           <div class="input-group">
-                            <input type="text" class="form-control drgpicker" name="enddate" value="" aria-describedby="button-addon2">
+                            <input type="text" class="form-control drgpicker @error ('enddate') is-invalid @enderror" name="enddate" value="" id="EndDate" aria-describedby="button-addon2">
                             <div class="input-group-append">
                               <div class="input-group-text" id="button-addon-date"><span class="fe fe-calendar fe-16"></span></div>
                             </div>
                           </div>
+                          @error('enddate')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div> 
+                            @enderror
                         </div>
                     </div>
                     <div class="form-row">
@@ -101,7 +111,7 @@
                                 </thead> 
                                 <tbody id="rrd">
                                     <tr>
-                                        <td><input type="text" name="rrd[0][rrd_name]" placeholder="Enter RRD name" class="form-control @error ('email') is-invalid @enderror"/>
+                                        <td><input type="text" name="rrd[0][rrd_name]" placeholder="Enter RRD name" class="form-control @error ('rrd[0][rrd_name]') is-invalid @enderror"/>
                                         </td> 
                                         <td><input type="text" name="rrd[0][rrd_title]" placeholder="Enter RRD Title" class="form-control @error ('rrd[0][rrd_title]') is-invalid @enderror"/>
                                         </td> 
@@ -164,11 +174,24 @@
         'zindex': '9999' /* fix modal open */
       });
 </script>
+
+{{-- <script>
+    $("#EndDate").change(function () {
+    var startDate = document.getElementById("StartDate").value;
+    var endDate = document.getElementById("EndDate").value;
+
+    console.log(startDate);
+    if ((Date.parse(startDate) >= Date.parse(endDate))) {
+        alert("End date should be greater than Start date");
+        document.getElementById("EndDate").value = "";
+    }
+});
+</script> --}}
     
 <script>
     $(document).ready(function() {
         window.setTimeout(function() {
-            $(".alert").fadeTo(1000, 0).slideUp(500, function(){
+            $(".alert").fadeTo(1100, 0).slideUp(500, function(){
                 $(this).remove();
             });
         }, 4000);

@@ -47,12 +47,13 @@ class RealtimeController extends Controller
         $uniqid = Str::random(5);
 
         date_default_timezone_set("Asia/Bangkok");
+        $format_date = date('m/d/Y H:i A');
         $this->validate($request, [
             'rrd.*.rrd_name' => 'required|regex:/(^(.*?[.]+rrd)?$)/',
             'rrd.*.rrd_title' => 'required',
             'report_title' => 'required',
-            'startdate' => 'required  ',
-            'enddate' => 'required  ',
+            'startdate' => 'required',
+            'enddate' => 'required|after:startdate',
             'email' => 'required|email',
             'periodic_graph' => 'required'
         ]);
@@ -81,12 +82,6 @@ class RealtimeController extends Controller
                 } else {
                     Storage::put("realtime_task/" . $filename, $second_var);
                 }
-                // if (!is_file($myfile)) {
-                //     $second_var = implode(";", $key);
-                //     Storage::append("realtime_task/" . $filename, $second_var);
-                // } else {
-                //     Storage::put("realtime_task/" . $filename, $second_var);
-                // }
             }
         }
         return redirect('/realtime')->with('status', 'Data Already Added with uniq code "' . $uniqid . '"');
