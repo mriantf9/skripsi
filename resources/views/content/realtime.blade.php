@@ -164,7 +164,8 @@
         showDropdowns: true,
         locale:
         {
-          format: 'MM/DD/YYYY hh:mm A',
+        //   format: 'MM/DD/YYYY hh:mm A',
+          format: 'DD MMMM YYYY hh:mm A',
         }
       });
       $('.time-input').timepicker(
